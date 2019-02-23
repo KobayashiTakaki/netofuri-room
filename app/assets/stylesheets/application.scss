@@ -1,0 +1,67 @@
+// Custom bootstrap variables must be set or imported *before* bootstrap.
+@import "bootstrap";
+
+body {
+  background-color: #fafafa;
+  padding-top: 60px;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.room-card {
+  border-radius: 5px;
+  border: solid 1px rgba(0, 0, 0, 0.3);
+
+  .username {
+    font-weight: bold;
+  }
+  .video-title {
+    font-size: 150%;
+    font-weight: bold;
+  }
+
+  .time {
+    font-weight: bold;
+  }
+}
+
+.viewing-info {
+  .video-title {
+    font-size: 120%;
+    font-weight: bold;
+  }
+
+  .user-count {
+    font-size: 120%;
+    font-weight: bold;
+  }
+
+  .time {
+    font-weight: bold;
+  }
+}
+
+.comment-area {
+  .comments {
+    max-width: 500px;
+    max-height: 300px;
+    overflow: auto;
+  }
+
+  .comment-at {
+    font-size: 80%;
+    color: #888888;
+  }
+
+  .username {
+    font-size: 80%;
+    color: #888888;
+  }
+}

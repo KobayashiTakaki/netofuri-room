@@ -4,6 +4,15 @@ class Video < ApplicationRecord
   require 'nokogiri'
   has_many :viewings
 
+  def self.find_or_scrape(id)
+    video = Video.find_by(netflix_id: id)
+    return video if video
+    video = new
+    video.attributes = scrape(id)
+    video.save!
+    return video
+  end
+
   def self.scrape(id)
     base_url = "https://www.netflix.com"
     path = "jp/title/#{id}"

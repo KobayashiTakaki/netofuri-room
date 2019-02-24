@@ -6,7 +6,7 @@ class Video < ApplicationRecord
 
   def self.scrape(id)
     base_url = "https://www.netflix.com"
-    path = "jp/title/#{id.to_s}"
+    path = "jp/title/#{id}"
     url = URI.join(base_url, path)
     res = HTTParty.get(url)
     html = Nokogiri::HTML(res.body)

@@ -1,5 +1,15 @@
 {
   "name": "netflix-room",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "@rails/webpacker": "^4.0.0-rc.7",
+    "axios": "^0.18.0",
+    "vue": "^2.6.7",
+    "vue-loader": "^15.6.4",
+    "vue-template-compiler": "^2.6.7",
+    "vue-turbolinks": "^2.0.4"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.2.0"
+  }
 }

@@ -95,6 +95,15 @@
             this.errorMessage = '情報が取得できませんでした、、、'
           ))
           .finally()
+      },
+      updateRooms() {
+        const length_bef = this.rooms.length
+        this.rooms = this.rooms.filter(
+          room => new Date(room.viewing.end_time) > new Date()
+        )
+        if(length_bef !== this.rooms.length){
+          this.getRooms()
+        }
       }
     },
     mounted() {

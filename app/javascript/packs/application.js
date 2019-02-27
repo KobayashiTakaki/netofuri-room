@@ -11,13 +11,13 @@ console.log('Hello World from Webpacker')
 
 import TurbolinksAdapter from 'vue-turbolinks'
 import Vue from 'vue/dist/vue.esm'
-import NewViewing from './components/new-viewing.vue'
+import RoomsIndex from './components/rooms-index.vue'
 Vue.use(TurbolinksAdapter)
 
 document.addEventListener('turbolinks:load', () => {
   const app = new Vue({
     el: '#app',
-    components: { NewViewing }
+    components: { RoomsIndex }
   })
 })
 

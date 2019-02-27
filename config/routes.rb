@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'base#index'
-  resources :rooms, only: [:show]
+  resources :rooms, only: [:index, :show]
   namespace :admin do
     resources :video_sets do
       resources :videos, only: [:index, :new, :create]

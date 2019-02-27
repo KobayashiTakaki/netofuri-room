@@ -24,7 +24,7 @@ class VideoSet < ApplicationRecord
   # 再生予定のviewingを作成する
   def create_upcoming_viewings
     to_time = Time.zone.now + 24.hour
-    latest_viewing ||= Viewing.new(room: Room.create!)
+    latest_viewing ||= Viewing.new(room: Room.create!(video_set: self))
     room = latest_viewing.room
     # 最新のviewingのend_timeから始める
     start_time = latest_viewing.end_time || Time.zone.now

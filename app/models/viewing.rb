@@ -9,7 +9,7 @@ class Viewing < ApplicationRecord
   }
   scope :latest, -> { order(end_time: :desc).first }
   scope :active, -> {
-    where("? between start_time and end_time", Time.zone.now)
+    where("? between start_time and end_time", Time.zone.now).first
   }
 
 end

@@ -5,4 +5,22 @@ class Room < ApplicationRecord
   def active_viewing
     viewings.active
   end
+
+  def to_hash
+    {
+      id: self.id,
+      viewing: {
+        start_time: active_viewing.start_time,
+        end_time: active_viewing.end_time
+      },
+      video: {
+        type: video_set.video_type,
+        title: video_set.title,
+        season: active_viewing.video.season,
+        episode: active_viewing.video.episode,
+        runtime: active_viewing.video.runtime,
+        netflix_id: active_viewing.video.netflix_id
+      }
+    }
+  end
 end

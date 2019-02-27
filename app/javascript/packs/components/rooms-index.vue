@@ -39,7 +39,7 @@
         rooms: [],
         playTimes: {},
         errorMessage: '',
-        intervalId: undefined
+        intervalIds: []
       }
     },
     methods: {
@@ -97,16 +97,16 @@
           .finally()
       }
     },
-    computed: {
-
-    },
     mounted() {
       this.getRooms()
       this.updateTimes()
-      this.intervalId = setInterval(this.updateTimes, 1000)
+      this.intervalIds.push(setInterval(this.updateTimes, 1000))
+      this.intervalIds.push(setInterval(this.updateRooms, 1000))
     },
-    beforeDestroy () {
-      clearInterval(this.intervalId)
+    beforeDestroy() {
+      this.intervalIds.forEach((id) => {
+        clearInterval(id)
+      })
     }
   }
 </script>

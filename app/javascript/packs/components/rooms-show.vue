@@ -16,6 +16,9 @@
         >
         </div>
       </div>
+      <span v-if="video.type == 'show'">
+        シーズン{{ video.season }}, 第{{ video.episode }}話
+      </span><br />
       <span class="time">{{ playTimeDisplay }}</span>
       <span class="px-1">/</span>
       <span class="time">{{ endTimeDisplay }}</span><br />

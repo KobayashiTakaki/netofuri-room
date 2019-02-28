@@ -3,8 +3,10 @@ class Room < ApplicationRecord
   has_many :viewings
 
   def active_viewing
-    viewings.active
+    viewings.active.first
   end
+
+  scope :active, -> { joins(:viewings).merge(Viewing.active) }
 
   def to_hash
     {

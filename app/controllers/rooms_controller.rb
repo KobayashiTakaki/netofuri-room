@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
   def index
-    rooms = Room.all
+    rooms = Room.active
     response_json = rooms.map do |room|
       room.to_hash
     end

@@ -28,7 +28,7 @@ class VideoSet < ApplicationRecord
     to_time = Time.zone.now + 24.hour
     video_ids = videos.order(:season, :episode).ids
 
-    if latest_viewing
+    if latest_viewing.present?
       # 最新のviewingのend_timeから始める
       start_time = latest_viewing.end_time
       # もうto_timeより後まであったらやめる

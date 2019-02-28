@@ -52,6 +52,8 @@ ul {
   .comments {
     max-width: 500px;
     max-height: 300px;
+    word-wrap: break-word;
+    word-break: break-all;
     overflow: auto;
   }
 

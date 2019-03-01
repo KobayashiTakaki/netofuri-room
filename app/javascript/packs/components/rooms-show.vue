@@ -32,6 +32,7 @@
       </div>
     </div>
     <comments-area
+      :loggedIn="loggedIn"
       :playTimeSec="playTime"
       :videoId="video.id">
     </comments-area>
@@ -60,6 +61,7 @@
         intervalIds: []
       }
     },
+    props: ['loggedIn'],
     components: {
       CommentsArea
     },

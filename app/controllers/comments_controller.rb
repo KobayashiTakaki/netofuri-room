@@ -18,12 +18,10 @@ class CommentsController < ApplicationController
   end
 
   def create
-    # セッションから取る。あとで直す
-    user = User.first
+    user = User.find(session[:user_id])
 
-    comment = Comment.new
+    comment = Comment.new(strong_params)
     comment.user = user
-    comment.update_attributes(strong_params)
     comment.save!
   end
 

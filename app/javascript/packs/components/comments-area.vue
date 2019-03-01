@@ -4,7 +4,7 @@
     <form action="#" class="form-inline"
       @submit.prevent
     >
-      <div class="form-group">
+      <div class="form-group" v-if="loggedIn">
         <input type="text" class="form-control form-control-sm mr-1"
           v-model="inputContent"
           :readonly="formDisabled ? true : null"
@@ -51,7 +51,7 @@
         intervalIds: []
       }
     },
-    props: ['playTimeSec', 'videoId'],
+    props: ['loggedIn', 'playTimeSec', 'videoId'],
     methods: {
       displayTime(comment) {
         return this.secToTime(comment.time)

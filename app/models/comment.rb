@@ -11,11 +11,11 @@ class Comment < ApplicationRecord
 
   def to_hash
     {
-      id: self.id,
-      time: self.time,
-      user_id: self.user.id,
-      username: self.user.name,
-      content: self.content
+      id: id,
+      time: time,
+      user_id: user.id,
+      username: user.display_name || user.name,
+      content: content
     }
   end
 end

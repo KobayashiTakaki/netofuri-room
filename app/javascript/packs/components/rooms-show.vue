@@ -86,9 +86,8 @@
       },
       getRoom() {
         this.loaded = false
-        const pathname = location.pathname
-        const matched = pathname.match(/(?<=rooms\/)[0-9]+/)
-        const room_id = matched[0]
+        const paths = location.pathname.split('/')
+        const room_id = paths[paths.length-1]
 
         axios
           .get('../rooms/' + room_id)

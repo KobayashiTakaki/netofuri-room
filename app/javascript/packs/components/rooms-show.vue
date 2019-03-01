@@ -113,7 +113,7 @@
         }
       },
       openVideo() {
-        const baseUrl = 'http://www.netflix.com/watch'
+        const baseUrl = 'https://www.netflix.com/watch'
         const videoId = this.video.netflix_id
         const params = '?t=' + this.playTime
         window.open(baseUrl + '/' + videoId + params)

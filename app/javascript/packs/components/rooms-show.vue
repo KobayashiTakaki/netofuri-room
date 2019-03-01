@@ -32,7 +32,7 @@
       </div>
     </div>
     <comments-area
-      :playTimeSec="playTimeSec()"
+      :playTimeSec="playTime"
       :videoId="video.id">
     </comments-area>
   </div>

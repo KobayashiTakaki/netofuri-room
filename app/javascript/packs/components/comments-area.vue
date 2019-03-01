@@ -17,6 +17,7 @@
           {{ errorMessage }}
         </span>
       </div>
+      <small v-else>コメントするには<a href="../login">ログイン</a>してください。</small>
     </form>
     <div class="comments mt-2">
       <ul>

@@ -1,6 +1,6 @@
 class Room < ApplicationRecord
   has_one :video_set
-  has_many :viewings
+  has_many :viewings, dependent: :destroy
 
   def active_viewing
     viewings.active.first

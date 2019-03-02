@@ -5,9 +5,9 @@
       v-bind:id="tagId(room)"
     >
       <div class="room-info">
-        <span class="video-title px-1">{{ room.video.title }}</span>の部屋
-        <span class="ml-2"v-if="room.video.type == 'show'">
-          {{ room.video.season }} - {{ room.video.episode }}
+        <span class="video-title px-1">{{ room.video.title }}</span>の部屋<br />
+        <span v-if="video(room).type == 'show'">
+          シーズン{{ video(room).season }}, 第{{ video(room).episode }}話
         </span><br />
         <div class="progress mt-2" style="height: 3px;">
           <div class="progress-bar bg-danger" role="progressbar"
@@ -21,6 +21,9 @@
         <span class="time">{{ secToTime(playTimes[room.id]) }}</span>
         <span class="px-1">/</span>
         <span class="time">{{ endTimeDisplay(room) }}</span>
+        <div class="viewing-users mt-3">
+          観てる人: <span class="user-count pr-1">{{ users(room).length }}</span>人
+        </div>
       </div>
       <a class="btn btn-secondary btn-sm" role="button"
         v-bind:href="path(room)"
@@ -67,6 +70,12 @@
       },
       endTimeSec(room) {
         return Math.round((new Date(room.viewing.end_time) - new Date(room.viewing.start_time))/1000)
+      },
+      video(room) {
+        return room.video
+      },
+      users(room) {
+        return room.users
       },
       updateTimes() {
         let playTimes = {}

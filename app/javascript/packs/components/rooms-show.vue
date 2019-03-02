@@ -149,10 +149,10 @@
         const params = {
           room_id: this.roomId
         }
-        axios.post('../joinings', params)
+        axios.post('../join', params)
       },
       leave() {
-        axios.delete('../joinings' + '/' + this.roomId)
+        axios.delete('../leave')
       }
     },
     computed: {

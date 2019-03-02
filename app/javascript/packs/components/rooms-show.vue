@@ -7,6 +7,9 @@
       <h4><span class="video-title">{{ video.title }}</span>の部屋</h4>
     </div>
     <div class="viewing-info mt-3">
+      <span v-if="video.type == 'show'">
+        シーズン{{ video.season }}, 第{{ video.episode }}話
+      </span><br />
       <div class="progress mt-2" style="height: 3px;">
         <div class="progress-bar bg-danger" role="progressbar"
           :style="{ width: seekBarPercent }"
@@ -16,26 +19,25 @@
         >
         </div>
       </div>
-      <span v-if="video.type == 'show'">
-        シーズン{{ video.season }}, 第{{ video.episode }}話
-      </span><br />
       <span class="time">{{ playTimeDisplay }}</span>
       <span class="px-1">/</span>
       <span class="time">{{ endTimeDisplay }}</span><br />
-      <button class="btn btn-primary"
-        @click="openVideo(5)"
-      >
-        動画を開く
-      </button>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="auto-open-check"
-          v-model="autoOpen"
+      <div class="open-video-btn mt-2">
+        <button class="btn btn-primary"
+          @click="openVideo(5)"
         >
-        <label class="form-check-label" for="auto-open-check">
-          次の動画を自動的に開く
-        </label>
+          動画を開く
+        </button>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="auto-open-check"
+            v-model="autoOpen"
+          >
+          <label class="form-check-label" for="auto-open-check">
+            次の動画を自動的に開く
+          </label>
+        </div>
       </div>
-      <div class="viewing-users mt-3">
+      <div class="viewing-users mt-2">
         観てる人: <span class="user-count pr-1">{{ users.length }}</span>人
       </div>
     </div>

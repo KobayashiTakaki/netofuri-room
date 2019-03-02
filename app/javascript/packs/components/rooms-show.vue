@@ -98,15 +98,15 @@
         const seconds = Math.floor(time - minutes * 60)
         return pad(hours, 2) + ':' + pad(minutes, 2) + ':' + pad(seconds, 2)
       },
+      setRoomId() {
+        const paths = location.pathname.split('/')
+        this.roomId = paths[paths.length-1]
+      },
       getRoom() {
         this.loaded = false
-        const paths = location.pathname.split('/')
-        const room_id = paths[paths.length-1]
-
         axios
-          .get('../rooms/' + room_id)
+          .get('../rooms/' + this.roomId)
           .then(response => {
-            this.roomId = response.data.id
             this.viewing = response.data.viewing
             this.video = response.data.video
             this.users = response.data.users
@@ -144,6 +144,15 @@
         if(this.videoWindow) {
           this.videoWindow.close()
         }
+      },
+      join() {
+        const params = {
+          room_id: this.roomId
+        }
+        axios.post('../joinings', params)
+      },
+      leave() {
+        axios.delete('../joinings' + '/' + this.roomId)
       }
     },
     computed: {
@@ -158,6 +167,8 @@
       }
     },
     mounted() {
+      this.setRoomId()
+      this.join()
       this.getRoom()
       this.intervalIds.push(setInterval(this.updateTime, 1000))
       this.intervalIds.push(setInterval(this.updateRoom, 1000))
@@ -166,6 +177,7 @@
       this.intervalIds.forEach((id) => {
         clearInterval(id)
       })
+      this.leave()
     }
   }
 </script>

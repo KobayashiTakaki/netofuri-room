@@ -19,4 +19,14 @@ class User < ApplicationRecord
       message: "表示名は30文字以内でお願いします。"
     }
 
+    def join(room)
+      leave if joining
+      viewing = room.active_viewing
+      Joining.create!(user: self, viewing: viewing)
+    end
+
+    def leave()
+      joining.destroy!
+    end
+
 end

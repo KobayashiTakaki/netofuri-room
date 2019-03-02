@@ -13,10 +13,11 @@ class RoomsController < ApplicationController
 
   def show
     room = Room.find(params[:id])
+
     respond_to do |format|
       format.html
       format.json { render json: room.to_hash }
     end
-
   end
+
 end

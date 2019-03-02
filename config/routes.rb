@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
   resources :users, only: [:new, :create, :edit, :update]
   resources :comments, only: [:index]
+  resources :joinings, only: [:create, :destroy]
   namespace :admin do
     resources :video_sets do
       resources :videos, only: [:index, :new, :create]

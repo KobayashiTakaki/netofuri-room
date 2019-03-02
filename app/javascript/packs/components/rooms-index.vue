@@ -12,9 +12,9 @@
         <div class="progress mt-2" style="height: 3px;">
           <div class="progress-bar bg-danger" role="progressbar"
             v-bind:style="{ width: seekBarPercent(room) }"
-            aria-valuenow="700"
+            :aria-valuenow="playTimeSec(room)"
             aria-valuemin="0"
-            aria-valuemax="7661"
+            :aria-valuemax="endTimeSec(room)"
           >
           </div>
         </div>

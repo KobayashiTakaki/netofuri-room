@@ -136,7 +136,6 @@
       openNextVideo() {
         if(this.autoOpen){
           this.openVideo(5)
-          this.autoOpen = false
         }
       },
       closeVideo() {

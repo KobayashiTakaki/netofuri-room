@@ -32,7 +32,7 @@ document.addEventListener('turbolinks:load', () => {
   }
 })
 
-document.addEventListener('turbolinks:load', () => {
+document.addEventListener('turbolinks:visit', () => {
   for (let vm of vms) {
     vm.$destroy()
   }

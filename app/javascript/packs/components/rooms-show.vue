@@ -23,10 +23,18 @@
       <span class="px-1">/</span>
       <span class="time">{{ endTimeDisplay }}</span><br />
       <button class="btn btn-primary"
-        @click="openVideo"
+        @click="openVideo(5)"
       >
         動画を開く
       </button>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="auto-open-check"
+          v-model="autoOpen"
+        >
+        <label class="form-check-label" for="auto-open-check">
+          次の動画を自動的に開く
+        </label>
+      </div>
       <div class="viewing-users mt-3">
         観てる人: <span class="user-count pr-1">{{ users.length }}</span>人
       </div>
@@ -54,6 +62,8 @@
         roomId: null,
         viewing: null,
         video: null,
+        videoWindow: null,
+        autoOpen: false,
         users: [],
         playTime: 0,
         endTime: 0,
@@ -102,6 +112,7 @@
             this.setEndTime()
             this.updateTime()
             this.loaded = true
+            this.openNextVideo()
           })
           .catch(error => (
             this.errorMessage = '情報が取得できませんでした、、、'
@@ -109,16 +120,29 @@
           .finally()
       },
       updateRoom() {
-        if(new Date(this.viewing.end_time) < new Date()) {
-          this.playTime = this.endTime
-          this.getRoom()
+        if(new Date() < new Date(this.viewing.end_time)){
+          return
         }
+        this.closeVideo()
+        this.playTime = this.endTime
+        this.getRoom()
       },
-      openVideo() {
+      openVideo(offset) {
         const baseUrl = 'https://www.netflix.com/watch'
         const videoId = this.video.netflix_id
-        const params = '?t=' + this.playTime
-        window.open(baseUrl + '/' + videoId + params)
+        const params = '?t=' + (this.playTime + offset)
+        this.videoWindow = window.open(baseUrl + '/' + videoId + params)
+      },
+      openNextVideo() {
+        if(this.autoOpen){
+          this.openVideo(5)
+          this.autoOpen = false
+        }
+      },
+      closeVideo() {
+        if(this.videoWindow) {
+          this.videoWindow.close()
+        }
       }
     },
     computed: {

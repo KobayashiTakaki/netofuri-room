@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(strong_params)
     if @user.save
+      log_in(@user)
       redirect_to root_url
     else
       render 'users/new'

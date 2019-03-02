@@ -1,4 +1,14 @@
 module SessionsHelper
+  def log_in(user)
+    session[:user_id] = user.id
+  end
+
+  def log_out
+    session[:user_id] = nil
+    current_user.leave if current_user
+    current_user = nil
+    redirect_to root_url
+  end
 
   def current_user
     if session[:user_id]

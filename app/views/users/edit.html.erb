@@ -7,13 +7,15 @@
     </ul>
   <% end %>
   <%= form_for @user do |f| %>
+    <h4>表示名の変更</h4>
     <div class="form-group">
       <%= f.label :display_name, "表示名" %>
       <%= f.text_field :display_name, class: "form-control" %>
     </div>
 
+    <h4>パスワードの変更</h4>
     <div class="form-group">
-      <%= f.label :password, "パスワード" %>
+      <%= f.label :password, "新しいパスワード" %>
       <%= f.password_field :password, class: "form-control" %>
     </div>
 

@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2019_02_27_093104) do
     t.index ["video_id"], name: "index_comments_on_video_id"
   end
 
-  create_table "joinings", id: false, force: :cascade do |t|
+  create_table "joinings", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "viewing_id"
     t.datetime "created_at", null: false

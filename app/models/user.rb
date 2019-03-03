@@ -20,13 +20,13 @@ class User < ApplicationRecord
     }
 
     def join(room)
-      leave if joining
+      leave
       viewing = room.active_viewing
       Joining.create!(user: self, viewing: viewing)
     end
 
     def leave()
-      joining.destroy!
+      joining.destroy! if joining
     end
 
 end

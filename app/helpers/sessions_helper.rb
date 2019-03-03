@@ -4,8 +4,8 @@ module SessionsHelper
   end
 
   def log_out
+    current_user.leave
     session[:user_id] = nil
-    current_user.leave if current_user
     current_user = nil
     redirect_to root_url
   end
@@ -24,5 +24,14 @@ module SessionsHelper
     unless logged_in?
       redirect_to root_url
     end
+  end
+
+  def redirect_back_or(default)
+    redirect_to(session[:back_path] || default)
+    session.delete(:back_path)
+  end
+
+  def store_location(path)
+    session[:back_path] = path
   end
 end

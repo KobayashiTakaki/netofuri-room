@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="rooms-index row">
-      <div class="col-md-6"
+      <div class="col-md-6 pb-2"
         v-for="room in rooms"
         v-bind:id="tagId(room)"
       >

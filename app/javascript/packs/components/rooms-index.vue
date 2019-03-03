@@ -1,11 +1,11 @@
 <template>
-  <div class="rooms-index row">
-    <div class="col-md-6">
-      <div class="px-3">
-        <div class="room-card mt-2 p-2"
-          v-for="room in rooms"
-          v-bind:id="tagId(room)"
-        >
+  <div class="container-fluid">
+    <div class="rooms-index row">
+      <div class="col-md-6"
+        v-for="room in rooms"
+        v-bind:id="tagId(room)"
+      >
+        <div class="room-card p-2 mt-2">
           <div class="room-info">
             <span class="video-title px-1">{{ room.video.title }}</span>の部屋<br />
             <span v-if="video(room).type == 'show'">

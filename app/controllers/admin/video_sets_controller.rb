@@ -1,4 +1,4 @@
-class Admin::VideoSetsController < ApplicationController
+class Admin::VideoSetsController < Admin::AdminController
   def index
   end
 

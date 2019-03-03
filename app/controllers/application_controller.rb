@@ -9,4 +9,10 @@ class ApplicationController < ActionController::Base
       redirect_to root_url
     end
   end
+
+  def allow_admin
+    unless current_user.admin
+      redirect_to root_url
+    end
+  end
 end

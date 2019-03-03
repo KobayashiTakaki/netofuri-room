@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   resources :comments, only: [:index]
   namespace :admin do
     resources :video_sets do
-      resources :videos, only: [:index, :new, :create]
       collection {post :import}
     end
     resources :videos do

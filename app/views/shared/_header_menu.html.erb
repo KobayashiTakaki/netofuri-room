@@ -6,18 +6,16 @@
     <div class="col">
       <div class="dropdown d-flex flex-row justify-content-end align-items-center">
         <button class="btn text-dark" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <% if current_user %>
-            <small class="mr-1">
-              <span class="username font-weight-bold">
-                <%= current_user.display_name || current_user.name %>
-              </span>
-              さん
-            </small>
-          <% end %>
           <i class="far fa-lg fa-user"></i>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
           <% if current_user %>
+            <h6 class="dropdown-header">
+              <span class="username font-weight-bold">
+                <%= current_user.display_name || current_user.name %>
+              </span>
+              さん
+            </h6>
             <%= link_to "アカウント設定", edit_user_path(current_user), class: "dropdown-item" %>
             <%= link_to "ログアウト", logout_path, method: :delete, class: "dropdown-item" %>
           <% else %>

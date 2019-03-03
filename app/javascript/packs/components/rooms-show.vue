@@ -1,51 +1,57 @@
 <template>
-  <div class="rooms-show" v-if="loaded">
-    <span v-if="errorMessage.length !== 0">
-      {{ errorMessage }}
-    </span>
-    <div class="page-header mt-3">
-      <h4><span class="video-title">{{ video.title }}</span>の部屋</h4>
-    </div>
-    <div class="viewing-info mt-3">
-      <span v-if="video.type == 'show'">
-        シーズン{{ video.season }}, 第{{ video.episode }}話
-      </span><br />
-      <div class="progress mt-2" style="height: 3px;">
-        <div class="progress-bar bg-danger" role="progressbar"
-          :style="{ width: seekBarPercent }"
-          :aria-valuenow="playTime"
-          aria-valuemin="0"
-          :aria-valuemax="endTime"
-        >
+  <div class="rooms-show row" v-if="loaded">
+    <div class="col-md-6">
+      <div class="video-info pl-3 pr-md-0 pr-3">
+        <span v-if="errorMessage.length !== 0">
+          {{ errorMessage }}
+        </span>
+        <div class="page-header mt-3">
+          <h4><span class="video-title">{{ video.title }}</span>の部屋</h4>
+        </div>
+        <div class="viewing-info mt-3">
+          <span v-if="video.type == 'show'">
+            シーズン{{ video.season }}, 第{{ video.episode }}話
+          </span><br />
+          <div class="progress mt-2" style="height: 3px;">
+            <div class="progress-bar bg-danger" role="progressbar"
+              :style="{ width: seekBarPercent }"
+              :aria-valuenow="playTime"
+              aria-valuemin="0"
+              :aria-valuemax="endTime"
+            >
+            </div>
+          </div>
+          <span class="time">{{ playTimeDisplay }}</span>
+          <span class="px-1">/</span>
+          <span class="time">{{ endTimeDisplay }}</span><br />
+          <div class="open-video-btn mt-2">
+            <button class="btn btn-primary"
+              @click="openVideo(5)"
+            >
+              動画を開く
+            </button>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="auto-open-check"
+                v-model="autoOpen"
+              >
+              <label class="form-check-label" for="auto-open-check">
+                次の動画を自動的に開く
+              </label>
+            </div>
+          </div>
+          <div class="viewing-users mt-2">
+            観てる人: <span class="user-count pr-1">{{ users.length }}</span>人
+          </div>
         </div>
       </div>
-      <span class="time">{{ playTimeDisplay }}</span>
-      <span class="px-1">/</span>
-      <span class="time">{{ endTimeDisplay }}</span><br />
-      <div class="open-video-btn mt-2">
-        <button class="btn btn-primary"
-          @click="openVideo(5)"
-        >
-          動画を開く
-        </button>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="auto-open-check"
-            v-model="autoOpen"
-          >
-          <label class="form-check-label" for="auto-open-check">
-            次の動画を自動的に開く
-          </label>
-        </div>
-      </div>
-      <div class="viewing-users mt-2">
-        観てる人: <span class="user-count pr-1">{{ users.length }}</span>人
-      </div>
     </div>
-    <comments-area
-      :loggedIn="loggedIn"
-      :playTimeSec="playTime"
-      :videoId="video.id">
-    </comments-area>
+    <div class="col-md-6">
+      <comments-area
+        :loggedIn="loggedIn"
+        :playTimeSec="playTime"
+        :videoId="video.id">
+      </comments-area>
+    </div>
   </div>
 </template>
 
@@ -188,3 +194,19 @@
     }
   }
 </script>
+
+<style scoped>
+  .video-title {
+    font-size: 120%;
+    font-weight: bold;
+  }
+
+  .user-count {
+    font-size: 120%;
+    font-weight: bold;
+  }
+
+  .time {
+    font-weight: bold;
+  }
+</style>

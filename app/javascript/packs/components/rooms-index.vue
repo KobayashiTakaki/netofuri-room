@@ -1,35 +1,39 @@
 <template>
-  <div class="room-cards">
-    <div class="room-card mt-2 p-2"
-      v-for="room in rooms"
-      v-bind:id="tagId(room)"
-    >
-      <div class="room-info">
-        <span class="video-title px-1">{{ room.video.title }}</span>の部屋<br />
-        <span v-if="video(room).type == 'show'">
-          シーズン{{ video(room).season }}, 第{{ video(room).episode }}話
-        </span><br />
-        <div class="progress mt-2" style="height: 3px;">
-          <div class="progress-bar bg-danger" role="progressbar"
-            v-bind:style="{ width: seekBarPercent(room) }"
-            :aria-valuenow="playTimeSec(room)"
-            aria-valuemin="0"
-            :aria-valuemax="endTimeSec(room)"
-          >
+  <div class="rooms-index row">
+    <div class="col-md-6">
+      <div class="px-3">
+        <div class="room-card mt-2 p-2"
+          v-for="room in rooms"
+          v-bind:id="tagId(room)"
+        >
+          <div class="room-info">
+            <span class="video-title px-1">{{ room.video.title }}</span>の部屋<br />
+            <span v-if="video(room).type == 'show'">
+              シーズン{{ video(room).season }}, 第{{ video(room).episode }}話
+            </span><br />
+            <div class="progress mt-2" style="height: 3px;">
+              <div class="progress-bar bg-danger" role="progressbar"
+                v-bind:style="{ width: seekBarPercent(room) }"
+                :aria-valuenow="playTimeSec(room)"
+                aria-valuemin="0"
+                :aria-valuemax="endTimeSec(room)"
+              >
+              </div>
+            </div>
+            <span class="time">{{ secToTime(playTimes[room.id]) }}</span>
+            <span class="px-1">/</span>
+            <span class="time">{{ endTimeDisplay(room) }}</span>
+            <div class="viewing-users mt-3">
+              観てる人: <span class="user-count pr-1">{{ users(room).length }}</span>人
+            </div>
           </div>
-        </div>
-        <span class="time">{{ secToTime(playTimes[room.id]) }}</span>
-        <span class="px-1">/</span>
-        <span class="time">{{ endTimeDisplay(room) }}</span>
-        <div class="viewing-users mt-3">
-          観てる人: <span class="user-count pr-1">{{ users(room).length }}</span>人
+          <a class="btn btn-secondary btn-sm" role="button"
+            v-bind:href="path(room)"
+          >
+            入る
+          </a>
         </div>
       </div>
-      <a class="btn btn-secondary btn-sm" role="button"
-        v-bind:href="path(room)"
-      >
-        入る
-      </a>
     </div>
   </div>
 </template>
@@ -133,3 +137,22 @@
     }
   }
 </script>
+
+<style scoped>
+  .room-card {
+    border-radius: 5px;
+    border: solid 1px rgba(0, 0, 0, 0.3);
+  }
+
+  .username {
+    font-weight: bold;
+  }
+  .video-title {
+    font-size: 150%;
+    font-weight: bold;
+  }
+
+  .time {
+    font-weight: bold;
+  }
+</style>

@@ -1,27 +1,35 @@
 <template>
-  <div class="comment-area mt-3">
+  <div class="comment-area pr-3 pl-md-0 pl-3 mt-3">
     <h4>コメント</h4>
-    <form action="#" class="form-inline"
-      @submit.prevent
-    >
-      <div class="form-group" v-if="loggedIn">
-        <input type="text" class="form-control form-control-sm mr-1"
-          v-model="inputContent"
-          :readonly="formDisabled ? true : null"
-        >
-        <button class="btn btn-primary" type="submit"
-          @click="submitComment"
-          :disabled="formDisabled ? true : null"
-        >送信</button>
-        <span class="error-message" v-if="errorMessage.length !== 0">
-          {{ errorMessage }}
-        </span>
-      </div>
-      <small v-else>コメントするには<a href="../login">ログイン</a>してください。</small>
-    </form>
-    <div class="comments mt-2">
+    <div v-if="loggedIn">
+      <form action="#" @submit.prevent>
+        <div class="form-row align-items-center">
+          <div class="col">
+            <input type="text" class="form-control form-control-sm mr-1"
+              v-model="inputContent"
+              :readonly="formDisabled ? true : null"
+            >
+          </div>
+          <div class="col">
+            <button class="btn btn-primary" type="submit"
+              @click="submitComment"
+              :disabled="formDisabled ? true : null"
+            >送信</button>
+          </div>
+
+        </div>
+      </form>
+      <span class="error-message" v-if="errorMessage.length !== 0">
+        {{ errorMessage }}
+      </span>
+    </div>
+    <div v-else>
+      <small>コメントするには<a href="../login">ログイン</a>してください。</small>
+    </div>
+
+    <div class="comments px-3 mt-2 w-100" v-if="comments.length > 0">
       <ul>
-        <li class="comment py-1"
+        <li class="comment py-2"
           v-for="comment in comments"
           :key="comment.id"
         >
@@ -143,7 +151,28 @@
 </script>
 
 <style scoped>
+  .comments {
+    background-color: #FFFFFF;
+    border-radius: 7px;
+    border: 1px solid rgba(0,0,0,0.04);
+    box-sizing: border-box;
+    max-height: 500px;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: auto;
+  }
+
   .comment:not(:last-child) {
     border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .comment-at {
+    font-size: 80%;
+    color: #888888;
+  }
+
+  .username {
+    font-size: 80%;
+    color: #888888;
   }
 </style>

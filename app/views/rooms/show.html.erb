@@ -1,9 +1,7 @@
-<div class="col-lg-8">
-  <div data-vue="RoomsShow">
-    <% if current_user %>
-      <rooms-show :logged-in="true"></rooms-show>
-    <% else %>
-      <rooms-show :logged-in="false"></rooms-show>
-    <% end %>
-  </div>
+<div data-vue="RoomsShow">
+  <% if current_user %>
+    <rooms-show :logged-in="true"></rooms-show>
+  <% else %>
+    <rooms-show :logged-in="false"></rooms-show>
+  <% end %>
 </div>

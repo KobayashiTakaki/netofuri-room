@@ -103,6 +103,12 @@
           .finally()
       },
       submitComment() {
+        if(this.formDisabled) {
+          return
+        }
+        if(this.inputContent == '') {
+          return
+        }
         this.formDisabled = true
         const path = '../videos/' + this.videoId + '/comments'
         const params = {

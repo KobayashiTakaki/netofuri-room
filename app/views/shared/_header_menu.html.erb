@@ -4,8 +4,16 @@
       <%= link_to "ねとふり部屋", root_url, class: "navbar-brand logo"%>
     </div>
     <div class="col">
-      <div class="dropdown float-right">
+      <div class="dropdown d-flex flex-row justify-content-end align-items-center">
         <button class="btn text-dark" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <% if current_user %>
+            <small class="mr-1">
+              <span class="username font-weight-bold">
+                <%= current_user.display_name || current_user.name %>
+              </span>
+              さん
+            </small>
+          <% end %>
           <i class="far fa-lg fa-user"></i>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">

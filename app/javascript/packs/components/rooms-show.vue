@@ -103,32 +103,37 @@
         this.roomId = paths[paths.length-1]
       },
       getRoom() {
-        this.loaded = false
-        axios
-          .get('../rooms/' + this.roomId)
-          .then(response => {
-            this.viewing = response.data.viewing
-            this.video = response.data.video
-            this.users = response.data.users
-            this.errorMessage = ''
-            this.setEndTime()
-            this.updateTime()
-            this.loaded = true
-            this.openNextVideo()
-          })
+        const response = axios.get('../rooms/' + this.roomId)
           .catch(error => (
             this.errorMessage = '情報が取得できませんでした、、、'
           ))
-          .finally()
+        return response
       },
-      updateRoom() {
+      async loadRoom() {
+        this.loaded = false
+        const response = await this.getRoom()
+        this.viewing = response.data.viewing
+        this.video = response.data.video
+        this.users = response.data.users
+        this.errorMessage = ''
+        this.setEndTime()
+        this.updateTime()
+        this.loaded = true
+
+      },
+      async updateUsers() {
+        const response = await this.getRoom()
+        this.users = response.data.users
+      },
+      reloadRoom() {
         if(new Date() < new Date(this.viewing.end_time)){
           return
         }
         this.closeVideo()
         this.playTime = this.endTime
         this.join()
-        this.getRoom()
+        this.loadRoom()
+        this.openNextVideo()
       },
       openVideo(offset) {
         const baseUrl = 'https://www.netflix.com/watch'
@@ -170,9 +175,10 @@
     mounted() {
       this.setRoomId()
       this.join()
-      this.getRoom()
+      this.loadRoom()
       this.intervalIds.push(setInterval(this.updateTime, 1000))
-      this.intervalIds.push(setInterval(this.updateRoom, 1000))
+      this.intervalIds.push(setInterval(this.reloadRoom, 1000))
+      this.intervalIds.push(setInterval(this.updateUsers, 5000))
     },
     beforeDestroy() {
       this.intervalIds.forEach((id) => {

@@ -127,6 +127,7 @@
         }
         this.closeVideo()
         this.playTime = this.endTime
+        this.join()
         this.getRoom()
       },
       openVideo(offset) {

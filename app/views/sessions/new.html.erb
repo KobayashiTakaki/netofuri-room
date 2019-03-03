@@ -1,4 +1,9 @@
 <div class="col-lg-8">
+  <% if flash[:error] %>
+    <div class="error-message">
+      <small class="text-danger"><%= flash[:error] %></small>
+    </div>
+  <% end %>
   <%= form_for :session, url: login_path do |f| %>
     <div class="form-group">
       <%= f.label :name, "アカウント名" %>

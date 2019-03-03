@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
   def new
+    back_path = Rails.application.routes.recognize_path(request.referer)
+    store_location(back_path)
     render 'sessions/new'
   end
 
@@ -7,7 +9,7 @@ class SessionsController < ApplicationController
     user = User.find_by(name: params[:session][:name])
     if user && user.authenticate(params[:session][:password])
       log_in(user)
-      redirect_to root_path
+      redirect_back_or root_path
     else
       render 'sessions/new'
     end

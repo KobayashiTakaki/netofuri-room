@@ -1,4 +1,5 @@
 class RoomsController < ApplicationController
+  before_action :store_location, only: [:show]
   def index
     rooms = Room.active
     response_json = rooms.map do |room|

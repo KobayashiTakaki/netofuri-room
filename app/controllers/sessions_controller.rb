@@ -1,7 +1,5 @@
 class SessionsController < ApplicationController
   def new
-    back_path = Rails.application.routes.recognize_path(request.referer)
-    store_location(back_path)
     render 'sessions/new'
   end
 

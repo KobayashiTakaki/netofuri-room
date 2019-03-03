@@ -31,7 +31,7 @@ module SessionsHelper
     session.delete(:back_path)
   end
 
-  def store_location(path)
-    session[:back_path] = path
+  def store_location
+    session[:back_path] = request.original_url if request.get?
   end
 end

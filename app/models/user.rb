@@ -25,7 +25,7 @@ class User < ApplicationRecord
       Joining.create!(user: self, viewing: viewing)
     end
 
-    def leave()
+    def leave
       joining.destroy! if joining
     end
 

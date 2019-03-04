@@ -125,7 +125,7 @@
         this.setEndTime()
         this.updateTime()
         this.loaded = true
-
+        this.openNextVideo()
       },
       async updateUsers() {
         const response = await this.getRoom()
@@ -139,7 +139,6 @@
         this.playTime = this.endTime
         this.join()
         this.loadRoom()
-        this.openNextVideo()
       },
       openVideo(offset) {
         const baseUrl = 'https://www.netflix.com/watch'

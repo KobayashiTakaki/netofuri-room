@@ -1,5 +1,5 @@
 class VideoSet < ApplicationRecord
-  belongs_to :room
+  belongs_to :room, dependent: :destroy
   has_many :videos, dependent: :destroy
 
   def self.import(file)

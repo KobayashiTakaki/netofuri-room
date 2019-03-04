@@ -3,8 +3,11 @@
     <div class="col">
       <%= link_to "ねとふり部屋", root_url, class: "navbar-brand logo"%>
     </div>
-    <div class="col">
-      <div class="dropdown d-flex flex-row justify-content-end align-items-center">
+    <div class="col d-flex flex-row justify-content-end align-items-center">
+      <%= link_to about_path, class:"btn" do %>
+        <i class="far fa-question-circle"></i>
+      <% end %>
+      <div class="dropdown">
         <button class="btn text-dark" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="far fa-lg fa-user"></i>
         </button>

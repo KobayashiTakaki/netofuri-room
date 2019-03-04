@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :redirect_loggedin_user, only: :new
+
   def new
     render 'sessions/new'
   end
@@ -18,4 +20,8 @@ class SessionsController < ApplicationController
     log_out
   end
 
+  private
+  def redirect_loggedin_user
+    redirect_to root_path if current_user
+  end
 end

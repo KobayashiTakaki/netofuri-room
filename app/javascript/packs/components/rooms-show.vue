@@ -1,5 +1,5 @@
 <template>
-  <div class="rooms-show row" v-if="loaded">
+  <div class="rooms-show row w-100" v-if="loaded">
     <div class="col-md-6">
       <div class="video-info pl-3 pr-md-0 pr-3">
         <span v-if="errorMessage.length !== 0">
@@ -23,7 +23,9 @@
           </div>
           <span class="time">{{ playTimeDisplay }}</span>
           <span class="px-1">/</span>
-          <span class="time">{{ endTimeDisplay }}</span><br />
+          <span class="time">{{ endTimeDisplay }}</span>
+          （残り: <span class="time">{{ restTimeDisplay }}</span>）
+          <br />
           <div class="open-video-btn mt-2">
             <button class="btn btn-primary"
               @click="openVideo(5)"
@@ -125,6 +127,7 @@
         this.setEndTime()
         this.updateTime()
         this.loaded = true
+        this.join()
         this.openNextVideo()
       },
       async updateUsers() {
@@ -136,8 +139,6 @@
           return
         }
         this.closeVideo()
-        this.playTime = this.endTime
-        this.join()
         this.loadRoom()
       },
       openVideo(offset) {
@@ -148,11 +149,12 @@
       },
       openNextVideo() {
         if(this.autoOpen){
-          this.openVideo(5)
+          const self = this
+          setTimeout(()=>{ self.openVideo(8) }, 3000)
         }
       },
       closeVideo() {
-        if(this.videoWindow) {
+        if(this.autoOpen && this.videoWindow) {
           this.videoWindow.close()
         }
       },
@@ -171,10 +173,19 @@
         return '' + this.playTime/this.endTime*100 + '%'
       },
       playTimeDisplay() {
+        if(this.endTime < this.playTime) {
+          return this.secToTime(this.endTime)
+        }
         return this.secToTime(this.playTime)
       },
       endTimeDisplay() {
         return this.secToTime(this.endTime)
+      },
+      restTimeDisplay() {
+        if(this.endTime < this.playTime) {
+          return this.secToTime(0)
+        }
+        return this.secToTime(this.endTime - this.playTime)
       }
     },
     mounted() {

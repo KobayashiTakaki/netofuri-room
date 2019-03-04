@@ -2,7 +2,7 @@ class RoomsController < ApplicationController
   before_action :store_location, only: [:show]
   def index
     rooms = Room
-      .active
+      .active_at(Time.zone.now)
       .sort_by_joinings
       .sort_by_start_time
 

@@ -2,17 +2,14 @@ class Room < ApplicationRecord
   has_one :video_set, dependent: :destroy
   has_many :viewings, dependent: :destroy
 
-  def active_viewing
-    viewings.active.first
-  end
-
-  scope :active, -> { joins(:viewings).merge(Viewing.active) }
+  scope :active_at, ->(time) { joins(:viewings).merge(Viewing.active_at(time)) }
   scope :sort_by_joinings, -> { order("viewings.joinings_count desc") }
   scope :sort_by_start_time, -> { order("viewings.start_time desc") }
 
   def to_hash
+    active_viewing = viewings.active_at(Time.zone.now).first
     {
-      id: self.id,
+      id: id,
       viewing: {
         start_time: active_viewing.start_time,
         end_time: active_viewing.end_time

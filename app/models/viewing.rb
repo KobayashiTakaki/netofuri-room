@@ -8,8 +8,8 @@ class Viewing < ApplicationRecord
     includes(:video).where(video: video_set.videos.ids)
   }
   scope :latest, -> { order(end_time: :desc).first }
-  scope :active, -> {
-    where("? between start_time and end_time", Time.zone.now)
+  scope :active_at, ->(time) {
+    where("? between start_time and end_time", time)
   }
 
 end

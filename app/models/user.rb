@@ -21,7 +21,7 @@ class User < ApplicationRecord
 
     def join(room)
       leave
-      viewing = room.active_viewing
+      viewing = Viewing.where(room: room).active_at(Time.zone.now)
       Joining.create!(user: self, viewing: viewing)
     end
 

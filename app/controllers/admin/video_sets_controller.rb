@@ -1,23 +1,16 @@
 class Admin::VideoSetsController < Admin::AdminController
   def index
+    @video_sets = VideoSet.all
   end
 
   def show
-  end
-
-  def new
-  end
-
-  def create
-  end
-
-  def edit
-  end
-
-  def update
+    @video_set = VideoSet.find(params[:id])
   end
 
   def destroy
+    video_set = VideoSet.find(params[:id])
+    video_set.destroy!
+    redirect_to admin_video_sets_path
   end
 
   def import

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'base#index'
+  get 'about', to: 'base#about'
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
@@ -12,10 +13,10 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :edit, :update]
   resources :comments, only: [:index]
   namespace :admin do
-    resources :video_sets do
+    resources :video_sets, only: [:index, :new, :show, :destroy] do
       collection {post :import}
     end
-    resources :videos do
+    resources :videos, only: [:new] do
       collection {post :import}
     end
   end

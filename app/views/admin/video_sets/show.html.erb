@@ -1,0 +1,33 @@
+<div class="col-lg-8">
+  <h4><%= @video_set.title %></h4>
+  <table class="table">
+    <caption>Videos</caption>
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">season</th>
+        <th scope="col">episode</th>
+        <th scope="col">runtime</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @video_set.videos.each do |video| %>
+        <tr>
+          <td><%= video.netflix_id %></td>
+          <td><%= video.season %></td>
+          <td><%= video.episode %></td>
+          <td><%= video.runtime %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="row">
+    <div class="col">
+      <%=
+        link_to "Delete This Video Set", admin_video_set_path(@video_set),
+        method: :delete,
+        class: "btn btn-danger"
+      %>
+    </div>
+  </div>
+</div>

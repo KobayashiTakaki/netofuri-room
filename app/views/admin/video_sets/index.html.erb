@@ -1,0 +1,30 @@
+<div class="col-lg-8">
+  <div class="row">
+    <div class="col-4">
+      <%= link_to "Add", new_admin_video_set_path, class: "btn btn-primary" %>
+    </div>
+    <div class="col-4">
+      <%= link_to "Add Videos", new_admin_video_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">title</th>
+        <th scope="col">type</th>
+        <th scope="col">videos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @video_sets.each do |video_set| %>
+        <tr>
+          <td><%= video_set.netflix_id %></td>
+          <td><%= link_to video_set.title, admin_video_set_path(video_set.id) %></td>
+          <td><%= video_set.video_type %></td>
+          <td><%= video_set.videos.size %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

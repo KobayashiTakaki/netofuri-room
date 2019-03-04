@@ -7,6 +7,8 @@ class Room < ApplicationRecord
   end
 
   scope :active, -> { joins(:viewings).merge(Viewing.active) }
+  scope :sort_by_joinings, -> { order("viewings.joinings_count desc") }
+  scope :sort_by_start_time, -> { order("viewings.start_time desc") }
 
   def to_hash
     {

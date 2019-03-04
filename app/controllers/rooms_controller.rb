@@ -1,7 +1,11 @@
 class RoomsController < ApplicationController
   before_action :store_location, only: [:show]
   def index
-    rooms = Room.active
+    rooms = Room
+      .active
+      .sort_by_joinings
+      .sort_by_start_time
+
     response_json = rooms.map do |room|
       room.to_hash
     end

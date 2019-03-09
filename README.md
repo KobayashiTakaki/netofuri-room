@@ -1,24 +1,17 @@
-# README
+# ねとふり部屋
+https://netofuri-room.herokuapp.com/
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## これは何か？
+Netflixの動画を同じタイミングで再生して、チャットができるサイトです。
 
-Things you may want to cover:
+## 仕組み
+Netflixの視聴URLに"t=120"といったパラメータを付与すると、  
+動画の始めからパラメータの秒数だけ進んだ箇所から再生が始まります。  
+サイト上でタイマーを管理しており、ユーザーがリンクを開くと共通の再生位置で動画が再生されるようになっています。
 
-* Ruby version
+## 製作期間
+リリースまで約1週間で作成しました。
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## アピールポイント
+フロントはVue.jsを使って作りました。  
+Railsからデータをjsonで取得するようにしています。

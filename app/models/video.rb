@@ -1,6 +1,6 @@
 class Video < ApplicationRecord
   belongs_to :video_set
-  has_many :comments, dependent: :destroy
+  has_many :scenes, dependent: :destroy
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|

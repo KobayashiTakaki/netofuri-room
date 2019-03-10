@@ -1,5 +1,5 @@
 class Room < ApplicationRecord
-  has_one :video_set, dependent: :destroy
+  has_one :scene, dependent: :destroy
   has_many :viewings, dependent: :destroy
 
   scope :active_at, ->(time) { joins(:viewings).merge(Viewing.active_at(time)) }

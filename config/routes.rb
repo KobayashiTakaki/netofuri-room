@@ -16,7 +16,8 @@ Rails.application.routes.draw do
     resources :video_sets, only: [:index, :new, :show, :destroy] do
       collection {post :import}
     end
-    resources :videos, only: [:new] do
+    resources :videos, shallow: true, only: [:show, :new] do
+      resources :scenes
       collection {post :import}
     end
   end

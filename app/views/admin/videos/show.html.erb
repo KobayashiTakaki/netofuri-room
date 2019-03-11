@@ -1,0 +1,47 @@
+<div class="col-lg-8">
+  <h4><%= @video.video_set.title %></h4>
+  <% if @video.video_set.video_type == "show" %>
+    シーズン<%= @video.season %>, 第<%= @video.episode %>話
+  <% end %>
+  <div class="col-4">
+    <%=
+      link_to "Add Scene", new_admin_video_scene_path(@video),
+      class: "btn btn-primary"
+    %>
+  </div>
+  <table class="table">
+    <caption>scenes</caption>
+    <thead>
+      <tr>
+        <th scope="col">title</th>
+        <th scope="col">start_time</th>
+        <th scope="col">end_time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @video.scenes.each do |scene| %>
+        <tr>
+          <td><%= scene.title %></td>
+          <td><%= scene.start_time %></td>
+          <td><%= scene.end_time %></td>
+          <td>
+            <%=
+              link_to "X", admin_scene_path(scene),
+              method: :delete,
+              class: "btn btn-danger"
+            %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="row">
+    <div class="col">
+      <%=
+        link_to "Delete This Video", admin_video_path(@video),
+        method: :delete,
+        class: "btn btn-danger"
+      %>
+    </div>
+  </div>
+</div>

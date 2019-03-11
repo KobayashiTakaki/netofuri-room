@@ -13,7 +13,7 @@
     <tbody>
       <% @video_set.videos.each do |video| %>
         <tr>
-          <td><%= video.netflix_id %></td>
+          <td><%= link_to video.netflix_id, admin_video_path(video.id) %></td>
           <td><%= video.season %></td>
           <td><%= video.episode %></td>
           <td><%= video.runtime %></td>

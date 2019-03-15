@@ -60,7 +60,7 @@
         intervalIds: []
       }
     },
-    props: ['loggedIn', 'playTimeSec', 'videoId'],
+    props: ['loggedIn', 'playTimeSec', 'sceneId'],
     methods: {
       displayTime(comment) {
         return this.secToTime(comment.time)
@@ -90,7 +90,7 @@
         if(this.playTimeSec > 1800){
           time_from = this.playTimeSec - 1800
         }
-        const path = '../videos/' + this.videoId + '/comments'
+        const path = '../scenes/' + this.sceneId + '/comments'
         const params = {
           time_to: this.playTimeSec,
           time_from: time_from
@@ -118,10 +118,10 @@
           return
         }
         this.formDisabled = true
-        const path = '../videos/' + this.videoId + '/comments'
+        const path = '../scenes/' + this.videoId + '/comments'
         const params = {
           comment: {
-            video_id: this.videoId,
+            scene_id: this.sceneId,
             time: this.playTimeSec,
             content: this.inputContent
           }

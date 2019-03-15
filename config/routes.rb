@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   post 'join', to: 'joinings#create'
   delete 'leave', to: 'joinings#destroy'
   resources :rooms, only: [:index, :show]
-  resources :videos, only: [] do
+  resources :scenes, only: [] do
     resources :comments, only: [:index, :create]
   end
   resources :users, only: [:new, :create, :edit, :update]

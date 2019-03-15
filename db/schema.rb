@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_10_131035) do
+ActiveRecord::Schema.define(version: 2019_03_14_134852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,12 +85,12 @@ ActiveRecord::Schema.define(version: 2019_03_10_131035) do
     t.datetime "start_time"
     t.datetime "end_time"
     t.bigint "room_id"
-    t.bigint "video_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "joinings_count", default: 0
+    t.bigint "scene_id"
     t.index ["room_id"], name: "index_viewings_on_room_id"
-    t.index ["video_id"], name: "index_viewings_on_video_id"
+    t.index ["scene_id"], name: "index_viewings_on_scene_id"
   end
 
 end

@@ -9,10 +9,12 @@
           <h4><span class="video-title">{{ video.title }}</span></h4>
         </div>
         <div class="viewing-info mt-3">
-          <span v-if="video.type == 'show'">
+          <div class="video-episode" v-if="video.type == 'show'">
             シーズン{{ video.season }}, 第{{ video.episode }}話
-          </span><br />
-          <span>{{ scene.title }}</span>
+          </div>
+          <div class="scene-title">
+            {{ scene.title }}
+          </div>
           <div class="progress mt-2" style="height: 3px;">
             <div class="progress-bar bg-danger" role="progressbar"
               :style="{ width: seekBarPercent }"
@@ -22,11 +24,13 @@
             >
             </div>
           </div>
-          <span class="time">{{ playTimeDisplay }}</span>
-          <span class="px-1">/</span>
-          <span class="time">{{ endTimeDisplay }}</span>
-          （本編 <span class="time">{{ absTimeDisplay }}</span> 時点）
-          <br />
+          <div class="play-time">
+            <span class="time">{{ playTimeDisplay }}</span>
+            <span class="px-1">/</span>
+            <span class="time">{{ endTimeDisplay }}</span>
+            （本編 <span class="time">{{ absTimeDisplay }}</span> 時点）
+          </div>
+
           <div class="open-video-btn mt-2">
             <button class="btn btn-primary"
               @click="openVideo(5)"

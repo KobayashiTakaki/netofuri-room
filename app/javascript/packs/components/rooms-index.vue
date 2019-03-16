@@ -7,11 +7,15 @@
       >
         <div class="room-card p-2 mt-2">
           <div class="room-info">
-            <span class="video-title px-1">{{ room.video.title }}</span><br />
-            <span v-if="video(room).type == 'show'">
+            <div class="video-title">
+              {{ room.video.title }}
+            </div>
+            <div class="video-episode" v-if="video(room).type == 'show'">
               シーズン{{ video(room).season }}, 第{{ video(room).episode }}話
-            </span><br />
-            <span class="scene-title px-1">{{ room.scene.title }}</span><br />
+            </div>
+            <div class="scene-title">
+              {{ room.scene.title }}
+            </div>
             <div class="progress mt-2" style="height: 3px;">
               <div class="progress-bar bg-danger" role="progressbar"
                 v-bind:style="{ width: seekBarPercent(room) }"
@@ -21,12 +25,14 @@
               >
               </div>
             </div>
-            <span class="time">{{ secToTime(playTimes[room.id]) }}</span>
-            <span class="px-1">/</span>
-            <span class="time">{{ endTimeDisplay(room) }}</span>
-            （本編 <span class="time">{{ absTimeDisplay(room) }}</span> 時点）
+            <div class="play-time">
+              <span class="time">{{ secToTime(playTimes[room.id]) }}</span>
+              <span class="px-1">/</span>
+              <span class="time">{{ endTimeDisplay(room) }}</span>
+              （本編 <span class="time">{{ absTimeDisplay(room) }}</span> 時点）
+            </div>
             <div class="viewing-users mt-3">
-              観てる人: <span class="user-count pr-1">{{ users(room).length }}</span>人
+              観てる人:<span class="user-count px-1">{{ users(room).length }}</span>人
             </div>
           </div>
           <a class="btn btn-secondary btn-sm" role="button"

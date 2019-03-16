@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
     time_from = params[:time_from] || 0
     time_to = params[:time_to]
     comments = Comment
-      .by_video(params[:video_id])
+      .by_scene(params[:scene_id])
       .order_by_time
       .time_from(time_from)
       .time_to(time_to)
@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
   private
   def strong_params
     params.require(:comment).permit(
-      :video_id, :time, :content
+      :scene_id, :time, :content
     )
   end
 end

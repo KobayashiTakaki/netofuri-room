@@ -7,10 +7,11 @@
       >
         <div class="room-card p-2 mt-2">
           <div class="room-info">
-            <span class="video-title px-1">{{ room.video.title }}</span>の部屋<br />
+            <span class="video-title px-1">{{ room.video.title }}</span><br />
             <span v-if="video(room).type == 'show'">
               シーズン{{ video(room).season }}, 第{{ video(room).episode }}話
             </span><br />
+            <span class="scene-title px-1">{{ room.scene.title }}</span><br />
             <div class="progress mt-2" style="height: 3px;">
               <div class="progress-bar bg-danger" role="progressbar"
                 v-bind:style="{ width: seekBarPercent(room) }"
@@ -23,6 +24,7 @@
             <span class="time">{{ secToTime(playTimes[room.id]) }}</span>
             <span class="px-1">/</span>
             <span class="time">{{ endTimeDisplay(room) }}</span>
+            （本編 <span class="time">{{ absTimeDisplay(room) }}</span> 時点）
             <div class="viewing-users mt-3">
               観てる人: <span class="user-count pr-1">{{ users(room).length }}</span>人
             </div>
@@ -69,11 +71,18 @@
         const sec = this.endTimeSec(room)
         return this.secToTime(sec)
       },
+      absTimeDisplay(room) {
+        const sec = this.absTimeSec(room)
+        return this.secToTime(sec)
+      },
       playTimeSec(room) {
         return Math.round((new Date() - new Date(room.viewing.start_time))/1000)
       },
       endTimeSec(room) {
         return Math.round((new Date(room.viewing.end_time) - new Date(room.viewing.start_time))/1000)
+      },
+      absTimeSec(room) {
+        return room.scene.start_time + this.playTimeSec(room)
       },
       video(room) {
         return room.video

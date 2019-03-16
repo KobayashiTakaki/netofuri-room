@@ -6,12 +6,13 @@
           {{ errorMessage }}
         </span>
         <div class="page-header mt-3">
-          <h4><span class="video-title">{{ video.title }}</span>の部屋</h4>
+          <h4><span class="video-title">{{ video.title }}</span></h4>
         </div>
         <div class="viewing-info mt-3">
           <span v-if="video.type == 'show'">
             シーズン{{ video.season }}, 第{{ video.episode }}話
           </span><br />
+          <span>{{ scene.title }}</span>
           <div class="progress mt-2" style="height: 3px;">
             <div class="progress-bar bg-danger" role="progressbar"
               :style="{ width: seekBarPercent }"
@@ -24,7 +25,7 @@
           <span class="time">{{ playTimeDisplay }}</span>
           <span class="px-1">/</span>
           <span class="time">{{ endTimeDisplay }}</span>
-          （残り: <span class="time">{{ restTimeDisplay }}</span>）
+          （本編 <span class="time">{{ absTimeDisplay }}</span> 時点）
           <br />
           <div class="open-video-btn mt-2">
             <button class="btn btn-primary"
@@ -51,7 +52,7 @@
       <comments-area
         :loggedIn="loggedIn"
         :playTimeSec="playTime"
-        :videoId="video.id">
+        :sceneId="scene.id">
       </comments-area>
     </div>
   </div>
@@ -72,6 +73,7 @@
         roomId: null,
         viewing: null,
         video: null,
+        scene: null,
         videoWindow: null,
         autoOpen: false,
         users: [],
@@ -122,6 +124,7 @@
         const response = await this.getRoom()
         this.viewing = response.data.viewing
         this.video = response.data.video
+        this.scene = response.data.scene
         this.users = response.data.users
         this.errorMessage = ''
         this.setEndTime()
@@ -144,7 +147,7 @@
       openVideo(offset) {
         const baseUrl = 'https://www.netflix.com/watch'
         const videoId = this.video.netflix_id
-        const params = '?t=' + (this.playTime + offset)
+        const params = '?t=' + (this.scene.start_time + this.playTime + offset)
         this.videoWindow = window.open(baseUrl + '/' + videoId + params)
       },
       openNextVideo() {
@@ -181,11 +184,8 @@
       endTimeDisplay() {
         return this.secToTime(this.endTime)
       },
-      restTimeDisplay() {
-        if(this.endTime < this.playTime) {
-          return this.secToTime(0)
-        }
-        return this.secToTime(this.endTime - this.playTime)
+      absTimeDisplay() {
+        return this.secToTime(this.scene.start_time + this.playTime)
       }
     },
     mounted() {

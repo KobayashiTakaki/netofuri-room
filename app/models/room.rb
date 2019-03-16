@@ -1,6 +1,7 @@
 class Room < ApplicationRecord
-  has_one :video_set, dependent: :destroy
+  has_one :scene, dependent: :destroy
   has_many :viewings, dependent: :destroy
+  delegate :video, to: :scene
 
   scope :active_at, ->(time) { joins(:viewings).merge(Viewing.active_at(time)) }
   scope :sort_by_joinings, -> { order("viewings.joinings_count desc") }
@@ -15,13 +16,18 @@ class Room < ApplicationRecord
         end_time: active_viewing.end_time
       },
       video: {
-        id: active_viewing.video.id,
-        type: video_set.video_type,
-        title: video_set.title,
-        season: active_viewing.video.season,
-        episode: active_viewing.video.episode,
-        runtime: active_viewing.video.runtime,
-        netflix_id: active_viewing.video.netflix_id
+        id: video.id,
+        type: video.video_type,
+        title: video.title,
+        season: video.season,
+        episode: video.episode,
+        netflix_id: video.netflix_id
+      },
+      scene: {
+        id: scene.id,
+        title: scene.title,
+        start_time: scene.start_time,
+        end_time: scene.end_time
       },
       users: active_viewing.users.map { |u| u.id }
     }

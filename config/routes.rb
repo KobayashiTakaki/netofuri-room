@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   post 'join', to: 'joinings#create'
   delete 'leave', to: 'joinings#destroy'
   resources :rooms, only: [:index, :show]
-  resources :videos, only: [] do
+  resources :scenes, only: [] do
     resources :comments, only: [:index, :create]
   end
   resources :users, only: [:new, :create, :edit, :update]
@@ -16,7 +16,8 @@ Rails.application.routes.draw do
     resources :video_sets, only: [:index, :new, :show, :destroy] do
       collection {post :import}
     end
-    resources :videos, only: [:new] do
+    resources :videos, shallow: true, only: [:show, :new] do
+      resources :scenes
       collection {post :import}
     end
   end

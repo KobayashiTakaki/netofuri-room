@@ -87,9 +87,6 @@
       getComments() {
         this.loaded = false
         let time_from = 0
-        if(this.playTimeSec > 1800){
-          time_from = this.playTimeSec - 1800
-        }
         const path = '../scenes/' + this.sceneId + '/comments'
         const params = {
           time_to: this.playTimeSec,

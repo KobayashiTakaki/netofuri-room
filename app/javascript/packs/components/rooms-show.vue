@@ -161,7 +161,7 @@
         }
       },
       closeVideo() {
-        if(this.autoOpen && this.videoWindow) {
+        if(this.videoWindow) {
           this.videoWindow.close()
         }
       },

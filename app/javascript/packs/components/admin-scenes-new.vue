@@ -42,15 +42,11 @@
       return {
         title: '',
         startTime: 0,
-        endTime: 0,
-        formDisabled: false
+        endTime: 0
       }
     },
     props: ['authenticationToken', 'postPath', 'video'],
     methods: {
-      displayTime(comment) {
-        return this.secToTime(comment.time)
-      },
       secToTime(timeInSeconds) {
         if(timeInSeconds == null) {
           return "--:--:--"
@@ -61,14 +57,6 @@
         const minutes = Math.floor(time / 60) % 60
         const seconds = Math.floor(time - minutes * 60)
         return pad(hours, 2) + ':' + pad(minutes, 2) + ':' + pad(seconds, 2)
-      },
-      extractNewComment(comments) {
-        const existIds = this.comments.map(
-          comment => comment.id
-        )
-        return comments.filter(
-          comment => !existIds.includes(comment.id)
-        )
       }
     },
     computed: {
@@ -81,30 +69,3 @@
     }
   }
 </script>
-
-<style scoped>
-  .comments {
-    background-color: #FFFFFF;
-    border-radius: 7px;
-    border: 1px solid rgba(0,0,0,0.04);
-    box-sizing: border-box;
-    max-height: 500px;
-    word-wrap: break-word;
-    word-break: break-all;
-    overflow: auto;
-  }
-
-  .comment:not(:last-child) {
-    border-bottom: 1px solid rgba(0,0,0,0.04);
-  }
-
-  .comment-at {
-    font-size: 80%;
-    color: #888888;
-  }
-
-  .username {
-    font-size: 80%;
-    color: #888888;
-  }
-</style>
